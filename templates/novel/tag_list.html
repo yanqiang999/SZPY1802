@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类列表</title>
+</head>
+<body>
+<h1>分类列表</h1>
+<table>
+    <thead>
+        <th>序号</th>
+        <th>标题</th>
+        <th>操作</th>
+    </thead>
+    <tbody>
+        {% for tag in tags %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ tag.title }}</td>
+                <td>
+                    <a href="/novel/tags?id={{ tag.id }}">编辑</a>
+
+                    <a onclick="del('{{ tag.id }}', '{{ tag.title }}')">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <td>
+            <button onclick="add()">新增</button>
+        </td>
+        <td colspan="2" align="right">
+            &gt;&gt;  1 2 3 4  &lt;&lt;
+        </td>
+
+    </tfoot>
+</table>
+<script>
+    function del(id,title) {
+        if(confirm('是否要删除' + title +"?")){
+            window.open('/novel/delete_tag?id=' + id);
+        }
+    }
+
+    function add() {
+        window.open('/novel/tags');
+    }
+</script>
+</body>
+</html>
